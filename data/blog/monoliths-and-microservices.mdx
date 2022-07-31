@@ -1,0 +1,54 @@
+---
+title: "Monoliths & Microservices"
+date: '2022-07-08'
+tags: ['Microservices', 'Architecture']
+draft: false
+summary: 'Microservices come with a substantial layer of complexity..'
+heroImage: 'microservices.webp'
+---
+
+There's a substantial trend in the direction of microservices and shade put on monolithic applications. Today we will go through the tradeoffs of both architectures and help understand..
+
+# Overview
+Neither architecture is superior or perfect, companies are using both very effectively (and not-so-effectively) today. Companies like Facebook, Shopify, StackOverflow and Segment have made very scalable and effective use of monolithic architectures, while companies like Slack, Twitter and many others have been building on microservice architectures. In my opinion, microservices are best implemented when the organizational structure encourages it and can be viewed as more of a topological change, rather than a technical decision.
+
+> Keith Adams Quote #1
+
+When adopting microservices, you've now introduced distributed systems to your architecture, adding a very substantial layer of complexity to your system that shouldn't be overlooked and should be well thought out. 
+
+> These (microservices/distributed systems) are way way harder to work with than a single piece of software, than a single monolithic system." <br/>
+>
+> &mdash; Matt Ranney, ["What I Wish I Had Known Before Scaling Uber to 1000 Services"](https://youtu.be/kb-m2fasdDY?t=430)
+
+
+# Team Indepedence
+
+# Fault Isolation
+Fault isolation is the idea that a failure in one part of the application won't bring down the entire system. In some languages, this can be a valid starting point for discussion. In languages like PHP, you get a sort of inherent fault isolation because of the architecture of PHP (all web requests get their own heap/stack). There are other potential solutions to this issue such as the "circuit breaker" technique or simply running those parts in isolated environments (e.g. lambda functions, etc.)
+
+# Bottom Line
+I personally am in favor of the simplicity and focus on deliverability of monolithic applications, however there are scenarios where microservices could be favored.
+
+> Be smart
+
+```javascript
+var num1, num2, sum
+num1 = prompt('Enter first number')
+num2 = prompt('Enter second number')
+sum = parseInt(num1) + parseInt(num2) // "+" means "add"
+alert('Sum = ' + sum) // "+" means combine into a string
+```
+
+> Boring is cool, keep it simple
+
+> Premature optimization is bad
+
+> Struggles of Microservices
+
+Now you have a distributed system, everything becomes a sort of RPC call. You have to deal with all of the conditions of the network (which is often unreliable and relatively slow) such as timeouts, etc.
+
+> Distributed Transactions
+
+> Introducing the Network
+
+> Communication Networking (TCP/UDP/HTTP) Service Mesh to abstract that layer, doesn't need to know about any of that. Envoy XSD
