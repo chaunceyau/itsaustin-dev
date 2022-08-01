@@ -1,7 +1,10 @@
 import { getAllFilesFrontMatter } from '@/lib/mdx'
 import siteMetadata from '@/data/siteMetadata'
-import ListLayout from '@/layouts/ListLayout'
+import { PostList } from '@/components/blog/PostList'
+import { BasicCard } from '@/components/BasicCard'
 import { PageSEO } from '@/components/SEO'
+
+import { useState } from 'react'
 
 export const POSTS_PER_PAGE = 5
 
@@ -16,16 +19,30 @@ export async function getStaticProps() {
   return { props: { initialDisplayPosts, posts, pagination } }
 }
 
-export default function Blog({ posts, initialDisplayPosts, pagination }) {
+export default function AllBlogPosts({ posts, initialDisplayPosts, pagination }) {
+  const [searchValue, setSearchValue] = useState('')
+  const filteredBlogPosts = posts.filter((frontMatter) => {
+    const searchContent = frontMatter.title + frontMatter.summary + frontMatter.tags.join(' ')
+    return searchContent.toLowerCase().includes(searchValue.toLowerCase())
+  })
+
+  // If initialDisplayPosts exist, display it if no searchValue is specified
+  const displayPosts =
+    initialDisplayPosts.length > 0 && !searchValue ? initialDisplayPosts : filteredBlogPosts
+
   return (
     <>
       <PageSEO title={`Blog - ${siteMetadata.author}`} description={siteMetadata.description} />
-      <ListLayout
-        posts={posts}
-        initialDisplayPosts={initialDisplayPosts}
-        pagination={pagination}
-        title="All Posts"
-      />
+      <BasicCard title="All Posts" headingSize="3xl">
+        <input
+          aria-label="Search articles"
+          type="text"
+          onChange={(e) => setSearchValue(e.target.value)}
+          placeholder="Search articles"
+          className="mb-4 block w-full rounded-md border border-gray-300 bg-white px-4 py-2 text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-900 dark:bg-gray-800 dark:text-gray-100"
+        />
+        <PostList posts={displayPosts} />
+      </BasicCard>
     </>
   )
 }

@@ -7,7 +7,7 @@ import Link from '@/components/Link'
 
 const postDateTemplate = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
 
-export default function PostLayout({ frontMatter, authorDetails, children, next, prev }) {
+export default function PostLayout({ frontMatter, children, authorDetails, next, prev }) {
   const { slug, date, title, tags } = frontMatter
   return (
     <SectionContainer>
@@ -18,7 +18,7 @@ export default function PostLayout({ frontMatter, authorDetails, children, next,
       />
       <article className="mx-auto max-w-4xl">
         <PostLayoutHeader date={date} title={title} tags={tags} />
-        <PostLayoutBody children={children} />
+        <PostLayoutBody>{children}</PostLayoutBody>
       </article>
       {next || prev ? (
         <div className="mx-auto mb-20 mt-10 flex max-w-4xl justify-between">
@@ -47,7 +47,7 @@ const PostLayoutHeader = ({ date, title, tags }) => (
     </div>
     <div className="flex gap-x-2">
       {tags?.map((tag) => (
-        <Tag text={tag} />
+        <Tag text={tag} key={tag} />
       ))}
     </div>
     {/* <hr className="border-px mt-8" /> */}

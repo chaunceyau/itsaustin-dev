@@ -1,5 +1,5 @@
-const IndividualAlbum = ({ params }) => {
-  return <span>welcome, {window?.location}</span>
+const IndividualAlbum = () => {
+  return <span>welcome</span>
 }
 
 export default IndividualAlbum

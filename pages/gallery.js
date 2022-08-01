@@ -7,13 +7,13 @@ import Link from 'next/link'
 //   return { props: { authorDetails } }
 // }
 
-export default function Gallery({}) {
+export default function Gallery() {
   return (
     <div>
       <h1 className="mb-8 text-3xl font-bold">Gallery</h1>
       <ul className="flex flex-col gap-y-6">
         {albums.map(({ imageSource, slug, title }) => (
-          <li>
+          <li key={slug}>
             <Link href={`/albums/${slug}`}>
               <div
                 className={`bg-[url('/static/${imageSource}')] object-middle flex h-52 cursor-pointer items-end rounded-xl bg-[rgb(0,0,0,0.5)] bg-bottom bg-blend-overlay`}
