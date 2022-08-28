@@ -1,0 +1,43 @@
+---
+title: 'Make sure to cancel your requests'
+date: '2022-05-08'
+tags: ['Typescript']
+draft: false
+summary: 'Discussing minor version upgrades in TS v4 as they are released'
+heroImage: 'typescript.webp'
+icon: TypeScript
+---
+
+
+w/ fetch
+
+useEffect(() => {
+  const controller = new AbortController();
+  const signal = controller.signal; 
+
+  fetch(``, {signal})
+    .then(() => {})
+    .catch(e => {
+      if (e.name === 'AbortController') { ... }
+    });
+
+  return () => {
+    controller.abort();
+  }
+}, [])
+
+w/ axios
+
+useEffect(() => {
+  const cancelToken = axios.CancelToken.source();
+
+  axios.get(``, {cancelToken: cancelToken.token})
+    .then(() => {})
+    .catch(e => {
+      if (axios.isCancel(e)) { ... }
+    });
+
+  return () => {
+    cancelToken.cancel();
+  }
+}, [])

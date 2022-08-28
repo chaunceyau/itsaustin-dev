@@ -22,7 +22,7 @@ export const PostList = ({ posts, maxNumPostsToDisplay }) => (
               )}
               <div className="pl-3">
                 <h2 className="mb-px text-lg font-medium">{title}</h2>
-                <p className="text-gray-600">{summary}</p>
+                <p className="text-gray-500 dark:text-gray-400">{summary}</p>
               </div>
             </Link>
           )

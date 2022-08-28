@@ -7,7 +7,7 @@ import { PageSEO } from '@/components/SEO'
 import { useState } from 'react'
 
 export const POSTS_PER_PAGE = 5
-
+const SHOULD_ENABLE_SEARCH = false
 export async function getStaticProps() {
   const posts = await getAllFilesFrontMatter('blog')
   const initialDisplayPosts = posts.slice(0, POSTS_PER_PAGE)
@@ -34,13 +34,15 @@ export default function AllBlogPosts({ posts, initialDisplayPosts, pagination })
     <>
       <PageSEO title={`Blog - ${siteMetadata.author}`} description={siteMetadata.description} />
       <BasicCard title="All Posts" headingSize="3xl">
-        <input
-          aria-label="Search articles"
-          type="text"
-          onChange={(e) => setSearchValue(e.target.value)}
-          placeholder="Search articles"
-          className="mb-4 block w-full rounded-md border border-gray-300 bg-white px-4 py-2 text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-900 dark:bg-gray-800 dark:text-gray-100"
-        />
+        {SHOULD_ENABLE_SEARCH && (
+          <input
+            aria-label="Search articles"
+            type="text"
+            onChange={(e) => setSearchValue(e.target.value)}
+            placeholder="Search articles"
+            className="mb-4 block w-full rounded-md border border-gray-300 bg-white px-4 py-2 text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-900 dark:bg-gray-800 dark:text-gray-100"
+          />
+        )}
         <PostList posts={displayPosts} />
       </BasicCard>
     </>

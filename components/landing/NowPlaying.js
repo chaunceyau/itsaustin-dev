@@ -1,5 +1,4 @@
 import { BasicCard } from '@/components/BasicCard'
-import Link from '@/components/Link'
 
 const ARTISTS = [
   {
@@ -30,26 +29,20 @@ const ARTISTS = [
 
 const NowPlayingCard = ({ href, imgSrc }) => (
   <a href={href} target="_blank" rel="noopener noreferrer">
-    <img className="mb-2 aspect-square rounded-lg object-cover" src={imgSrc} />
+    <img
+      className="mb-2 aspect-square rounded-lg object-cover shadow-sm duration-300 hover:scale-105 hover:transform"
+      src={imgSrc}
+    />
   </a>
 )
 
 export const NowPlaying = () => {
   return (
-    <BasicCard title="Now Playing">
+    <BasicCard title="Now Playing" readMore={{ href: '/blog', label: 'All Artists' }}>
       <div className="mb-2 grid grid-cols-5 gap-x-4">
         {ARTISTS.map(({ href, imgSrc }) => (
           <NowPlayingCard key={imgSrc} href={href} imgSrc={imgSrc} />
         ))}
-      </div>
-      <div className="flex text-base font-medium leading-6">
-        <Link
-          href="/blog"
-          className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-          aria-label="all posts"
-        >
-          All Artists &rarr;
-        </Link>
       </div>
     </BasicCard>
   )
