@@ -16,7 +16,7 @@ export default function Home({ posts }) {
     <>
       <PageSEO title={siteMetadata.title} description={siteMetadata.description} />
       <div className="flex flex-col gap-y-6">
-        <HeroBlock />
+        {/* <HeroBlock /> */}
         <RecentPosts posts={posts} />
         <NowPlaying />
       </div>

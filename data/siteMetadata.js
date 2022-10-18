@@ -1,7 +1,7 @@
 const siteMetadata = {
-  title: 'thetradeoffs.io',
+  title: 'austin chauncey | blog',
   author: 'Austin Chauncey',
-  headerTitle: 'thetradeoffs.io',
+  headerTitle: 'austin chauncey',
   description: 'My personal website',
   language: 'en-us',
   theme: 'system', // system, dark or light
