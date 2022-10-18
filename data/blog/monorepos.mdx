@@ -1,23 +1,42 @@
 ---
-title: 'Typescript 4.x Upgrades'
+title: 'Monorepos vs Polyrepos'
 date: '2022-05-08'
-tags: ['Typescript']
-draft: false
-summary: 'Discussing minor version upgrades in TS v4 as they are released'
+tags: ['Code Organization']
+draft: true
+summary: 'Monorepos vs Polyrepos'
 heroImage: 'typescript.webp'
 icon: TypeScript
 ---
 
-Typescript is still a relatively new improvement in the JS ecosystem. As such, there are new features that improve our everyday workflows that are being released in the present.
 
-# v4.0
+# Abstract
+Let's analyze the pros and cons of monorepo and polyrepo (many indepedent repositories) setups. There are teams using both effectively and each, of course, has pros and cons. There are many open-source tools out there built by many great teams — Buck by Facebook, Bazel by Google, Rush by Microsoft, Pants by Twitter, Turborepo by Vercel, Lerna and Nx by Nrwl just to name a few options.
 
-Let's analyze v4.0
+When making a decision of the approach to take, you are often considering how to break out shared or non-core logic from the core application. This may be in the form of pulling out resuable helper functions/utilities, component libraries, design systems and many other cases. Open source projects also often use monorepos to separate different packages of libraries in a single location.
 
-# v4.1
+# Why Monorepos?
 
-Let's analyze v4.0
+### Easy to share functionality
+Creating a shared library is as easy as adding another folder to your repository (usually under a packages/libs folder). This encourages separating application concerns and not duplicating logic as the overhead of the alternative would be adding the functionality to a shared library in a separate repository, version bumping the library, publishing the library, version bumping the depedency in the local project and then finally committing changes will inevitably lead to simply avoiding that overhead.
 
-# v4.2
+### Shared ownership/less cognitive overhead
 
-Let's analyze v4.0
+
+### Easy to create shared libraries
+
+### Avoiding "depedency hell" with a [one version rule](https://opensource.google/documentation/reference/thirdparty/oneversion)
+
+Forcing all apps/libraries to use a single version of dependencies can avoid a lot of maintenance headache, potential hard-to-find bugs and reduce application bloat. e.g. if you upgrade a depedency in a shared library (say TS or React) with a polyrepo setup, you likely need to ensure backwards compatability to allow existing users of the shared library to release hotfixes without the need to make the relevant upgrades to handle the updated dependency version in the shared library. 
+
+### Avoid need to version/publish library
+
+
+
+# Depedency Hell - Single Version Policy
+What if one app uses styled components 7 and other uses 6.. which do you install. React 16 v 17 etc...
+
+# Package Management
+There's a good amount of overhead deal with publishing, part of the reason there's lots of tools around that = changeset, semantic release, auto/otto?
+
+Uber
+https://www.youtube.com/watch?v=lV8-1S28ycM

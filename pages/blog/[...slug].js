@@ -42,16 +42,17 @@ export async function getStaticProps({ params }) {
 
 export default function Blog({ post, authorDetails, prev, next }) {
   const { mdxSource, toc, frontMatter } = post
-
   return (
-    <MDXLayoutRenderer
-      layout={frontMatter.layout || DEFAULT_LAYOUT}
-      toc={toc}
-      mdxSource={mdxSource}
-      frontMatter={frontMatter}
-      authorDetails={authorDetails}
-      prev={prev}
-      next={next}
-    />
+    <div className="mb-24">
+      <MDXLayoutRenderer
+        layout={frontMatter.layout || DEFAULT_LAYOUT}
+        toc={toc}
+        mdxSource={mdxSource}
+        frontMatter={frontMatter}
+        authorDetails={authorDetails}
+        prev={prev}
+        next={next}
+      />
+    </div>
   )
 }

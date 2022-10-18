@@ -12,6 +12,10 @@ export const MDXComponents = {
   TOCInline,
   a: CustomLink,
   pre: Pre,
+  defintion: () => {
+    console.log('hmmm')
+    return <bold>test..fdsa.</bold>
+  },
   BlogNewsletterForm: BlogNewsletterForm,
   wrapper: ({ components, layout, ...rest }) => {
     const Layout = require(`../layouts/${layout}`).default
@@ -21,6 +25,5 @@ export const MDXComponents = {
 
 export const MDXLayoutRenderer = ({ layout, mdxSource, ...rest }) => {
   const MDXLayout = useMemo(() => getMDXComponent(mdxSource), [mdxSource])
-
   return <MDXLayout layout={layout} components={MDXComponents} {...rest} />
 }

@@ -15,6 +15,9 @@ module.exports = {
   darkMode: 'class',
   theme: {
     extend: {
+      width: {
+        92: '30rem',
+      },
       spacing: {
         '9/16': '56.25%',
       },
@@ -46,6 +49,8 @@ module.exports = {
               fontWeight: '700',
               letterSpacing: theme('letterSpacing.tight'),
               color: theme('colors.gray.900'),
+              marginBottom: 0,
+              marginTop: '2.5rem',
             },
             h2: {
               fontWeight: '700',

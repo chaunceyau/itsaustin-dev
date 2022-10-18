@@ -7,7 +7,8 @@ import { getAllFilesFrontMatter } from '@/lib/mdx'
 
 export async function getStaticProps() {
   const posts = await getAllFilesFrontMatter('blog')
-  return { props: { posts } }
+  const publishedPosts = posts.filter((p) => !p.draft)
+  return { props: { posts: publishedPosts } }
 }
 
 export default function Home({ posts }) {

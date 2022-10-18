@@ -6,17 +6,18 @@ import { PageSEO } from '@/components/SEO'
 
 import { useState } from 'react'
 
-export const POSTS_PER_PAGE = 5
+export const POSTS_PER_PAGE = 10
 const SHOULD_ENABLE_SEARCH = false
 export async function getStaticProps() {
   const posts = await getAllFilesFrontMatter('blog')
-  const initialDisplayPosts = posts.slice(0, POSTS_PER_PAGE)
+  const publishedPosts = posts.filter((p) => !p.draft)
+  const initialDisplayPosts = publishedPosts.slice(0, POSTS_PER_PAGE)
   const pagination = {
     currentPage: 1,
-    totalPages: Math.ceil(posts.length / POSTS_PER_PAGE),
+    totalPages: Math.ceil(publishedPosts.length / POSTS_PER_PAGE),
   }
 
-  return { props: { initialDisplayPosts, posts, pagination } }
+  return { props: { initialDisplayPosts, posts: publishedPosts, pagination } }
 }
 
 export default function AllBlogPosts({ posts, initialDisplayPosts, pagination }) {

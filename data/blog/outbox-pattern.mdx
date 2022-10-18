@@ -1,0 +1,35 @@
+---
+title: 'Outbox Pattern'
+date: '2022-10-17'
+tags: ['Event Driven Architecture', 'Microservices']
+draft: false
+summary: 'Ensuring your events are reliably delivered to your message bus.'
+heroImage: 'microservices.webp'
+icon: Microservices
+---
+
+# Overview
+
+When a change happens in your system, you often persist that change to a service database and want the event to be dispatched to a message bus that handles delivering the message to consumers. In most modern databases, you can ensure data changes are atomic with transactions. Persisting to your database and a network call to add that event to your message bus are two different operations, which are not inherently atomic. In the diagrams, gray circles with 'x' represent potential points of failure.
+
+<div className="w-42 md:w-72 xl:w-92 mx-auto mt-8 mb-10">
+  ![Event Driven Example](/static/images/outbox-blog-basic.png)
+</div>
+
+- First, save the state change to your database. Then make a network call to add this to your message bus. If the later fails, you now have a change in your database which is inconsistent with the rest of your system — likely requiring manual intervention.
+- The inverse: First, dispatch an event to your message bus. After that succeeds, save the state change to your database. If the later fails, you now have a change in your system which is inconsistent with your database — likely requiring manual intervention.
+- Another alternative is only dispatching an event on state change and not making the database update in the function call. Instead, you'd add a local event consumer that makes the change to the database as well. This comes with the drawback of making your entire system async.
+- One other option, which is discussed below, is known as the outbox pattern.
+
+# Outbox Pattern
+One method to ensure events are reliably delivered to the message bus is the "outbox pattern." The idea is to commit the database operation and event details to dispatch in the same database operation, ensuring the operation is atomic. You then have another thread/process handle reading & dequeueing events from the database.
+
+<div className="w-42 md:w-72 xl:w-92 mx-auto mt-8 mb-10">
+  ![Event Driven Example](/static/images/outbox-blog-adv.png)
+</div>
+
+If operation (2) fails, we simply send back an error response. 
+
+Operations (3) and (4) still are not inherently atomic, but you can gracefully handle failures arising and ensure your data is eventually consistent. If the operation fails in step 3, there's no issue — you simply retry.
+
+⭐ If the failure happens in (4) trying to dequeue or mark the event as processed in the database — **after** sending to the message bus, then the background thread/process will eventually try again and add a duplicate to your message bus. To handle the duplicate events added to your message bus, you will need to ensure your event consumers are <definition>idempotent</definition>.

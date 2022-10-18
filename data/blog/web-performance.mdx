@@ -1,0 +1,24 @@
+---
+title: 'Web Performance'
+date: '2022-05-08'
+tags: ['Typescript']
+draft: true
+summary: 'How teams like Google, AirBnb, GitHub and Carta have implemented authorization at scale'
+heroImage: 'typescript.webp'
+icon: Authorization
+---
+
+
+parse/eval JS
+
+"Fetching in the client also means more JavaScript over the network, and more time for parse/eval. Sometimes we forget about parse/eval, but you can see the JS execution on the 15th request took longer than the document did to download! Next.js is sending 1.5x more JavaScript than Remix with 566 kB vs. 371 kB unpacked. Over the network it's 50 kB more compressed (172 kB vs. 120 kB)."
+
+compression/decompression
+
+It can't load images until it has fetched data, and it can't fetch data until it has loaded, parsed, and evaluated the JavaScript.
+
+If the user's browser could make the request to Shopify that quickly, the Remix server can certainly do it faster. The user's connection to the cloud is always going to be slower than your server's, probably best to keep the data fetching there.
+
+Next.js can't load images until it loads data, it can't load data until it loads JavaScript, and it can't load JavaScript until the document loads. The user's network is a multiplier for every single step in that chain
+
+Remix can start fetching from Shopify immediately when a request is received. It doesn't have to wait for the browser to download the document and then the JavaScript. It doesn't matter how slow the user's network is, the fetch to the Shopify API on the server doesn't change and is probably under 200ms.
