@@ -45,7 +45,7 @@ const PostLayoutHeader = ({ date, title, tags }) => (
     <div className="mb-4">
       <PageTitle>{title}</PageTitle>
     </div>
-    <div className="flex gap-x-2 mb-6">
+    <div className="mb-6 flex gap-x-2">
       {tags?.map((tag) => (
         <Tag text={tag} key={tag} />
       ))}
