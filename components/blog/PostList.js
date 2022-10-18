@@ -2,7 +2,7 @@ import Link from '@/components/Link'
 import * as icons from '@/components/blog/BlogIcons'
 
 export const PostList = ({ posts, maxNumPostsToDisplay }) => (
-  <div className="space-y-2 pb-6 md:space-y-6">
+  <div className="space-y-2 pb-4 md:space-y-6">
     <ul className="flex flex-col gap-y-4">
       {posts.length === 0 && <p>No posts found.</p>}
       {posts
