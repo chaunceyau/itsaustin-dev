@@ -12,17 +12,17 @@ const ARTISTS = [
       'https://www.biography.com/.image/t_share/MTQ0NTk4NzY3ODM4OTYzMDMx/alicia_keys_michael_muller_nbc_nbcu_getty_images_592222308_profile.jpg',
   },
   {
-    href: 'https://www.aliciakeys.com',
+    href: 'https://www.leadingvibe.com/',
     imgSrc:
       'https://www.essence.com/wp-content/uploads/2021/07/126320300_422382922255489_4024618295309104371_n.jpg?width=600',
   },
   {
-    href: 'https://www.aliciakeys.com',
+    href: 'https://www.giveonofficial.com/',
     imgSrc:
       'https://www.billboard.com/wp-content/uploads/2021/08/soundopener-giveon-2021-bb11-tayo-kuku-billboard-2-1240-1628180503.jpg?w=1024',
   },
   {
-    href: 'https://www.aliciakeys.com',
+    href: 'https://www.originalkoffee.com/',
     imgSrc: 'https://www.dancehallmag.com/assets/2022/03/About-Me-Instagram-Post.png',
   },
 ]
