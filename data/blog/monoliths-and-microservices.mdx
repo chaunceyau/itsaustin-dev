@@ -2,19 +2,11 @@
 title: 'Monoliths & Microservices'
 date: '2022-07-08'
 tags: ['Microservices', 'Architecture']
-draft: true
+draft: false
 summary: 'Microservices come with a substantial layer of complexity..'
 heroImage: 'microservices.webp'
 icon: Microservices
 ---
-
-https://twitter.com/dhh/status/1222966700913479681?lang=en
-
-"Monoliths are the future because the problem people are trying to solve with microservices doesn’t really line up with reality", I aspire to such savage language as that which flows from 
-@kelseyhightower
-. PREACH BROTHER! 😂❤️✊
-
-https://m.signalvnoise.com/the-majestic-monolith/
 
 # Overview
 
@@ -22,19 +14,42 @@ Neither architecture is superior or perfect, companies are using both very effec
 
 # Complexity
 
-When adopting microservices, you've now introduced distributed systems to your architecture, adding a very substantial layer of complexity to your system that shouldn't be overlooked and should be well thought out.
+When adopting microservices, you've now made you application a complex distributed systems, adding a very substantial layer of complexity to your system that shouldn't be overlooked and should be well thought out. It's very easy to overlook and minimize the problems introduced with distributing your application, e.g. distributed transactions, eventual consistency, network failures, message bus ordering, data consistency workers, competing consumers, domain boundaries, service discovery, dead-letter queues, idempotent consumers, outboxes, queue backpressure, etc. etc.
 
 > These (microservices/distributed systems) are way way harder to work with than a single piece of software, than a single monolithic system.
->
-> Matt Ranney, ["What I Wish I Had Known Before Scaling Uber to 1000 Services"](https://youtu.be/kb-m2fasdDY?t=430)
+
+Matt Ranney, Principal Architecture @ Uber & Doordash [What I Wish I Had Known Before Scaling Uber to 1000 Services](https://youtu.be/kb-m2fasdDY?t=430)
+
+One argument you will likely hear during your career is that the application you've been building has become to large to develop and understand in a single codebase. This is likely an issue with your engineering practices/standards that is not just going to magically go away by distributing your system (and will likely become worse). Focusing your efforts towards improving those root issues and building a well modularized monolith will often pay dividends over adding another layer of complexity in your infrastructure. Remember, Facebook and Shopify operate primarily with monoliths — your system likely isn't as complex as you've proclaimed.
+
+> The extrordinary claim that the complicated computer program you have trouble developing and understanding needs to be a complicated distributed system instead and that will make it easier to deploy and change.
+
+Keith Adams, Principal Architect at Facebook & Slack https://youtu.be/sLEuXDgfAS4?t=3889
+
+Often it's smart to only split out the functionality that can truly benefit from the textbook benefits of microservices.
+
+> We have a few other monolithic apps going through similar processes of componentization right now; some with the goal of splitting into separate services long term, some aiming for the modular monolith. We are very deliberate about when to split functionality out into separate services, and we only do it for good reasons. That’s because splitting a single monolithic application into a distributed system of services increases the overall complexity considerably.
+
+https://shopify.engineering/shopify-monolith
 
 # Scale
 
-Microservices are often touted as being "the way to scale," but this seems to be a bit overdrawn. Shopify handled [black-friday traffic running on a monolith](https://twitter.com/ShopifyEng/status/1465806691543531525), it's very likely that you're organization can operate fine with a monolith. Shopify isn't the only company either -- teams such as Facebook, Stackoverflow and others have ran massive businesses on a monolith architecture. Putting more of your focus on effective caching mechanisms, improving data access operations and simple horizontal scaling can often have a larger payoff than just breaking up your application.
+Microservices are often touted as being "the way to scale," but this seems to be a bit overdrawn. Shopify handled [black-friday traffic running on a monolith](https://twitter.com/ShopifyEng/status/1465806691543531525), it's very likely that you're organization can operate fine with a monolith. Shopify isn't the only company either — teams such as Facebook, StackOverflow and others have ran massive businesses on a monolith architecture. Putting more of your focus on effective caching mechanisms, improving data access operations and simple horizontal scaling can often have a larger payoff than just breaking up your application. You're organization is likely not dealing with the same scale issues as Netlix or Google, so you probably don't need the same solutions.
+
+> People try to copy Netflix, but they can only copy what they see. They copy the results, not the process
+
+Adrian Cockcroft, former Netflix Chief Cloud Architect
 
 # Organization structure
 
+Organizational topology can arguably be the strongest rationale for adopting microserivces. If your organizations that have teams that operate **truly indepedently and have almost zero cross-functional work**, this can be the perfect fit for microservices. Google is a great example of this as their product offerings between Gmail, Search and Photos have very little overlap and are essentially autonomous organizations.
+
 Teams often turn to microservices as a way to simplify the code a team interacts with, but this often tends to add more complexity. Facebook runs in a monolith, allowing all developers to contribute to a single codebase that powers their entire application. The simplicity of this removes a large level of cognitive overhead. However, for organizations that have teams that operate **truly indepedently and have almost zero cross-functional work**, this can be the perfect fit for microservices.
+
+> Microservices are best implemented when the organizational structure encourages it and can be viewed as more of a topological change, rather than a technical decision.
+> I think of microservices as an organizational technology in a way. Moreso than a computer programming technology.
+
+Keith Adams, Principal Architect at Facebook & Slack
 
 # Fault Isolation
 
@@ -42,56 +57,8 @@ Fault isolation is the idea that a failure in one part of the application won't 
 
 # Bottom Line
 
-I personally am in favor of the simplicity and focus on deliverability of monolithic applications, however there are scenarios where microservices could be favored.
+Don't fall in the trap of adopting microservices to match the latest trends. Technology exists as a solution to a problem and microservices likely aren't the one solution to the issues you are, or think you are facing. Monoliths can be very ["majestic" (David Heinemeier Hansson, creator of Ruby on Rails)](https://m.signalvnoise.com/the-majestic-monolith/).
 
-> Be smart
+> Monoliths are the future because the problem people are trying to solve with microservices doesn’t really line up with reality
 
-```javascript
-var num1, num2, sum
-num1 = prompt('Enter first number')
-num2 = prompt('Enter second number')
-sum = parseInt(num1) + parseInt(num2) // "+" means "add"
-alert('Sum = ' + sum) // "+" means combine into a string
-```
-
-> Boring is cool, keep it simple
-
-> Premature optimization is bad
-
-> Struggles of Microservices
-
-Now you have a distributed system, everything becomes a sort of RPC call. You have to deal with all of the conditions of the network (which is often unreliable and relatively slow) such as timeouts, etc.
-
-> Distributed Transactions
-
-> Introducing the Network
-
-> Communication Networking (TCP/UDP/HTTP) Service Mesh to abstract that layer, doesn't need to know about any of that. Envoy XSD
-
-> Data synchornization assurance
-
-#
-
-# Complexity
-
-There's two stories to consider when talking microservice complexity, the "complexity/difficulty" of understanding a monolith that people will often argue as a reason to adopt microservices and the actual true complexity building microservices/distributed systems.
-
-> The extrordinary claim that the complicated computer program you have trouble developing and understanding needs to be a complicated distributed system instead and that will make it easier to deploy and change.
-
-https://youtu.be/sLEuXDgfAS4?t=3889
-
-##
-
-"We have a few other monolithic apps going through similar processes of componentization right now; some with the goal of splitting into separate services long term, some aiming for the modular monolith. We are very deliberate about when to split functionality out into separate services, and we only do it for good reasons. That’s because splitting a single monolithic application into a distributed system of services increases the overall complexity considerably."
-https://shopify.engineering/shopify-monolith
-
-Facebook Engineering with Pete Hunt
-
-Opt-in stateful models: Strong/Eventual consistency, First-write/Last-write wins
-
-There's a substantial trend in the direction of microservices and shade put on monolithic applications. Today we will go through the tradeoffs of both architectures and help understand..
-
-> Microservices are best implemented when the organizational structure encourages it and can be viewed as more of a topological change, rather than a technical decision.
-> I think of microservices as an organizational technology in a way. Moreso than a computer programming technology.
-
-- Keith Adams
+[Kelsey Hightower, Principal Architect at Google](https://changelog.com/posts/monoliths-are-the-future)
