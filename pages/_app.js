@@ -43,7 +43,7 @@ export default function App({ Component, pageProps }) {
 export const Dock = () => {
   return (
     <div className="fixed bottom-0 left-0 flex w-full justify-center pb-4">
-      <div className="flex gap-x-6 rounded-lg border border-gray-200 border-opacity-50 bg-gray-200 bg-opacity-50 px-6 py-3 text-gray-500 duration-500 hover:scale-110 dark:border-gray-500 dark:border-opacity-25 dark:bg-gray-700 dark:text-gray-300">
+      <div className="flex gap-x-6 rounded-lg border border-gray-200 border-opacity-50 bg-gray-100 px-6 py-3 text-gray-500 duration-500 hover:scale-110 dark:border-gray-500 dark:border-opacity-25 dark:bg-gray-700 dark:text-gray-300">
         <DockItem icon={<HomeIcon />} href="/" />
         <DockItem icon={<BlogIcon />} href="/blog" />
         <DockItem icon={<GalleryIcon />} href="/gallery" />
