@@ -4,6 +4,7 @@ import { BlogSEO } from '@/components/SEO'
 import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
 import Link from '@/components/Link'
+import React from 'react'
 
 const postDateTemplate = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
 
@@ -54,6 +55,6 @@ const PostLayoutHeader = ({ date, title, tags }) => (
   </header>
 )
 
-const PostLayoutBody = ({ children }) => (
-  <div className="prose max-w-none pb-8 dark:prose-dark">{children}</div>
-)
+const PostLayoutBody = ({ children }) => {
+  return <div className="prose max-w-none pb-8 dark:prose-dark">{children}</div>
+}

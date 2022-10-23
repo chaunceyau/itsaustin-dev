@@ -1,7 +1,7 @@
 const siteMetadata = {
   title: 'austin chauncey | blog',
   author: 'Austin Chauncey',
-  headerTitle: 'austin chauncey',
+  headerTitle: 'austin.dev',
   description: 'My personal website',
   language: 'en-us',
   theme: 'system', // system, dark or light

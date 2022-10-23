@@ -34,7 +34,7 @@ export default function AllBlogPosts({ posts, initialDisplayPosts, pagination })
   return (
     <>
       <PageSEO title={`Blog - ${siteMetadata.author}`} description={siteMetadata.description} />
-      <BasicCard title="All Posts" headingSize="3xl">
+      <BasicCard title="All Posts" headingSize="xl">
         {SHOULD_ENABLE_SEARCH && (
           <input
             aria-label="Search articles"

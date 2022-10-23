@@ -1,11 +1,18 @@
 import Link from '@/components/Link'
 
-export const BasicCard = ({ children, title, readMore, headingSize = 'xl', topRightElement }) => {
+export const BasicCard = ({
+  children,
+  title,
+  readMore,
+  headingSize = 'xl',
+  topRightElement,
+  styled = false,
+}) => {
   return (
-    <div className="rounded-lg border px-6 py-4 dark:border-gray-700">
+    <div className={styled ? 'rounded-lg border px-6 py-4 dark:border-gray-700' : ''}>
       <div className={`flex`}>
         <h2
-          className={`mb-4 flex-shrink-0 text-${headingSize} font-bold text-gray-700 dark:text-gray-100`}
+          className={`mb-4 flex-shrink-0 text-${headingSize} font-bold text-gray-900 dark:text-gray-100`}
         >
           {title}
         </h2>

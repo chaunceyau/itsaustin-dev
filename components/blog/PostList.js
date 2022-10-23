@@ -12,7 +12,7 @@ export const PostList = ({ posts, maxNumPostsToDisplay }) => (
           return (
             <Link
               href={'/blog/' + slug}
-              className="flex text-primary-500 duration-300 hover:pl-1"
+              className="flex text-gray-900 duration-300 hover:pl-1 dark:text-white"
               key={slug}
             >
               {IconComponent && (
