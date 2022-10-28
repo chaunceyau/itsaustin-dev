@@ -30,7 +30,7 @@ const ARTISTS = [
 ]
 
 const NowPlayingCard = ({ href, imgSrc, alt }) => (
-  <a href={href} target="_blank" rel="noopener noreferrer">
+  <a href={href} target="_blank" rel="noopener noreferrer" className="rounded-lg">
     <Image
       className="mb-2 aspect-square rounded-lg object-cover shadow-sm duration-300 hover:scale-105 hover:transform"
       src={imgSrc}
