@@ -57,7 +57,7 @@ export const Dock = (location = 'left') => {
 
 const DockItem = ({ icon, href, noPadding }) => {
   const baseClasses = [
-    'peer bg-opacity-85 cursor-pointer rounded-lg bg-gray-200 duration-300 hover:my-2 hover:scale-[115%] dark:bg-gray-500',
+    'peer bg-opacity-85 cursor-pointer rounded-lg bg-gray-200 duration-300 hover:my-2 hover:scale-[115%] dark:bg-gray-500 mx-auto',
   ]
   if (!noPadding) baseClasses.push('p-3')
   const base = <div className={baseClasses.join(' ')}>{icon}</div>
