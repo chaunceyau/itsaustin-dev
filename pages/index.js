@@ -1,5 +1,5 @@
 import { RecentPosts } from '@/components/landing/RecentPosts'
-import { HeroBlock } from '@/components/landing/HeroBlock'
+import { FavoriteReads } from '@/components/landing/FavoriteReads'
 import { NowPlaying } from '@/components/landing/NowPlaying'
 import { PageSEO } from '@/components/SEO'
 import siteMetadata from '@/data/siteMetadata'
@@ -18,6 +18,7 @@ export default function Home({ posts }) {
       <div className="flex flex-col gap-y-6">
         {/* <HeroBlock /> */}
         <RecentPosts posts={posts} />
+        {/* <FavoriteReads posts={posts} /> */}
         <NowPlaying />
       </div>
     </>

@@ -40,10 +40,10 @@ export default function App({ Component, pageProps }) {
   )
 }
 
-export const Dock = () => {
+export const Dock = (location = 'left') => {
   return (
-    <div className="fixed bottom-0 left-0 flex w-full justify-center pb-4">
-      <div className="flex gap-x-6 rounded-lg border border-gray-200 border-opacity-50 bg-gray-100 px-6 py-3 text-gray-500 duration-500 hover:scale-110 dark:border-gray-500 dark:border-opacity-25 dark:bg-gray-700 dark:text-gray-300">
+    <div className="fixed top-0 left-0 flex h-screen flex-col justify-center pl-4">
+      <div className="-mt-8 flex flex-col gap-y-5 rounded-lg border border-gray-200 border-opacity-50 bg-gray-100 px-3 py-4 text-gray-500 duration-500 hover:scale-110 dark:border-gray-500 dark:border-opacity-25 dark:bg-gray-700 dark:text-gray-300">
         <DockItem icon={<HomeIcon />} href="/" />
         <DockItem icon={<BlogIcon />} href="/blog" />
         <DockItem icon={<GalleryIcon />} href="/gallery" />
@@ -57,9 +57,9 @@ export const Dock = () => {
 
 const DockItem = ({ icon, href, noPadding }) => {
   const baseClasses = [
-    'peer bg-opacity-85 cursor-pointer rounded-lg bg-gray-200 duration-300 hover:mx-2 hover:scale-[115%] dark:bg-gray-500',
+    'peer bg-opacity-85 cursor-pointer rounded-lg bg-gray-200 duration-300 hover:my-2 hover:scale-[115%] dark:bg-gray-500',
   ]
-  if (!noPadding) baseClasses.push('p-4')
+  if (!noPadding) baseClasses.push('p-3')
   const base = <div className={baseClasses.join(' ')}>{icon}</div>
 
   if (!href) return base
@@ -73,7 +73,7 @@ const HomeIcon = () => (
     viewBox="0 0 24 24"
     strokeWidth={1.5}
     stroke="currentColor"
-    className="h-6 w-6"
+    className="m-0 h-5 w-5"
   >
     <path
       strokeLinecap="round"
@@ -85,7 +85,7 @@ const HomeIcon = () => (
 const LinkedinIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    className="h-6 w-6"
+    className="m-0 h-5 w-5"
     width="24"
     height="24"
     viewBox="0 0 24 24"
@@ -107,7 +107,7 @@ const LinkedinIcon = () => (
 const GithubIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    className="h-6 w-6"
+    className="m-0 h-5 w-5"
     width="24"
     height="24"
     viewBox="0 0 24 24"
@@ -129,7 +129,7 @@ const BlogIcon = () => (
     viewBox="0 0 24 24"
     strokeWidth={1.5}
     stroke="currentColor"
-    className="h-6 w-6"
+    className="m-0 h-5 w-5"
   >
     <path
       strokeLinecap="round"
@@ -145,7 +145,7 @@ const GalleryIcon = () => (
     viewBox="0 0 24 24"
     strokeWidth={1.5}
     stroke="currentColor"
-    className="h-6 w-6"
+    className="m-0 h-5 w-5"
   >
     <path
       strokeLinecap="round"
