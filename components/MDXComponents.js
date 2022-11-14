@@ -9,7 +9,17 @@ import TOCInline from './TOCInline'
 import Pre from './Pre'
 
 export const MDXComponents = {
-  Image,
+  Image: (args) => {
+    console.log(args)
+    return (
+      <Image
+        alt={args.alt}
+        src={require(`public/static/images/outbox-blog-basic.png`)}
+        width={args.width}
+        height={args.height}
+      />
+    )
+  },
   TOCInline,
   a: CustomLink,
   pre: Pre,

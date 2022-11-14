@@ -17,12 +17,12 @@ export default function PostLayout({ frontMatter, children, authorDetails, next,
         authorDetails={authorDetails}
         {...frontMatter}
       />
-      <article className="mx-auto max-w-4xl">
+      <article className="mx-auto max-w-3xl">
         <PostLayoutHeader date={date} title={title} tags={tags} />
         <PostLayoutBody>{children}</PostLayoutBody>
       </article>
       {next || prev ? (
-        <div className="mx-auto mb-20 mt-10 flex max-w-4xl justify-between">
+        <div className="mx-auto mb-20 mt-10 flex max-w-3xl justify-between">
           <div>{!!prev && <Link href={`/blog/${prev.slug}`}>Previous</Link>}</div>
           <div>{!!next && <Link href={`/blog/${next.slug}`}>Next</Link>}</div>
         </div>
