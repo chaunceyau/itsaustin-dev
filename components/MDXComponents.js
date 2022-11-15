@@ -58,9 +58,9 @@ export const MDXComponents = {
     const Layout = require(`../layouts/${layout}`).default
     return (
       <motion.div
-        initial={{ opacity: 0.5, height: 25 }}
+        initial={{ opacity: 0.5 }}
         animate={{ opacity: 1, height: '100%' }}
-        transition={{ duration: 1.5 }}
+        transition={{ duration: 1 }}
         className="overflow-hidden"
       >
         <Layout {...rest} />
