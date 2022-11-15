@@ -14,9 +14,10 @@ export default function Gallery() {
       <ul className="flex flex-col gap-y-6">
         {albums.map(({ imageSource, slug, title }) => (
           <li key={slug}>
-            <Link href={`/albums/${slug}`}>
+            <Link href={`/albums/${slug}`} passHref>
               <div
-                className={`bg-[url('/static/${imageSource}')] object-middle flex h-52 cursor-pointer items-end rounded-xl bg-[rgb(0,0,0,0.5)] bg-bottom bg-blend-overlay`}
+                style={{ background: `url('/static/${imageSource}') center` }}
+                className="flex h-52 cursor-pointer items-end rounded-xl bg-[rgb(0,0,0,0.5)] bg-bottom bg-blend-overlay"
               >
                 <h3 className="mb-6 ml-7 text-2xl font-bold text-white">{title}</h3>
               </div>

@@ -2,16 +2,16 @@ export default [
   {
     slug: 'norway',
     title: 'Norway',
-    imageSource: 'images/ocean.jpeg',
+    imageSource: 'images/gallery/preik.jpg',
   },
   {
     slug: 'california',
     title: 'California',
-    imageSource: 'images/time-machine.jpg',
+    imageSource: 'images/gallery/tahoe.png',
   },
   {
     slug: 'italy',
     title: 'Italy',
-    imageSource: 'images/time-machine.jpg',
+    imageSource: 'images/gallery/dolomites.jpg',
   },
 ]
