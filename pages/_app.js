@@ -43,7 +43,7 @@ export default function App({ Component, pageProps }) {
 export const Dock = () => {
   return (
     <div className="fixed bottom-0 left-0 flex w-screen flex-col items-center justify-center px-4 pb-4 lg:top-0 lg:h-screen lg:w-auto lg:pb-0 lg:pl-6 xl:pl-8">
-      <div className="-mt-8 flex flex-row items-center gap-y-5 rounded-lg border border-gray-200 border-opacity-50 bg-gray-100 px-3 py-3 text-gray-500 duration-500 hover:scale-110 dark:border-gray-500 dark:border-opacity-25 dark:bg-gray-700 dark:text-gray-300 lg:flex-col lg:py-4">
+      <div className="-mt-8 flex flex-row items-center gap-x-3 gap-y-5 rounded-lg border border-gray-200 border-opacity-50 bg-gray-100 px-3 py-3 text-gray-500 duration-500 hover:scale-110 dark:border-gray-500 dark:border-opacity-25 dark:bg-gray-700 dark:text-gray-300 md:gap-x-5 lg:flex-col lg:py-4">
         <DockItem icon={<HomeIcon />} href="/" />
         <DockItem icon={<BlogIcon />} href="/blog" />
         <DockItem icon={<GalleryIcon />} href="/gallery" />
@@ -57,7 +57,7 @@ export const Dock = () => {
 
 const DockItem = ({ icon, href, noPadding }) => {
   const baseClasses = [
-    'peer bg-opacity-85 cursor-pointer rounded-lg bg-gray-200 duration-300 mx-2 hover:mx-3 lg:hover:mx-0 lg:hover:my-2 hover:scale-[115%] dark:bg-gray-500 mx-auto',
+    'peer bg-opacity-85 cursor-pointer rounded-lg bg-gray-200 duration-300 hover:mx-1 md:hover:mx-2 lg:hover:mx-0 lg:hover:my-2 hover:scale-[115%] dark:bg-gray-500 mx-auto',
   ]
   if (!noPadding) baseClasses.push('p-3')
   const base = <div className={baseClasses.join(' ')}>{icon}</div>
