@@ -1,7 +1,6 @@
 /* eslint-disable react/display-name */
 import { useMemo } from 'react'
 
-import { motion } from 'framer-motion'
 import { getMDXComponent } from 'mdx-bundler/client'
 import Image from './Image'
 import CustomLink from './Link'
@@ -56,16 +55,7 @@ export const MDXComponents = {
   // BlogNewsletterForm: BlogNewsletterForm,
   wrapper: ({ components, layout, ...rest }) => {
     const Layout = require(`../layouts/${layout}`).default
-    return (
-      <motion.div
-        initial={{ opacity: 0.5 }}
-        animate={{ opacity: 1, height: '100%' }}
-        transition={{ duration: 1 }}
-        className="overflow-hidden"
-      >
-        <Layout {...rest} />
-      </motion.div>
-    )
+    return <Layout {...rest} />
   },
 }
 
