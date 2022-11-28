@@ -9,15 +9,8 @@ import Pre from './Pre'
 
 export const MDXComponents = {
   Image: (args) => {
-    console.log(args)
-    return (
-      <Image
-        alt={args.alt}
-        src={require(`public/static/images/outbox-blog-basic.png`)}
-        width={args.width}
-        height={args.height}
-      />
-    )
+    if (!args.src) return null
+    return <Image alt={args.alt} src={require(args.src)} width={args.width} height={args.height} />
   },
   TOCInline,
   a: CustomLink,
