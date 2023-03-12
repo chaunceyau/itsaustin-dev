@@ -1,0 +1,79 @@
+---
+title: 'Colocating Data Dependencies'
+date: '2022-03-12'
+tags: ['GraphQL']
+draft: false
+summary: 'Understanding how to actually avoid waterfalls in GraphQL'
+heroImage: 'graphql.png'
+icon: GraphQL
+---
+
+GraphQL is incredibly powerful, but also incredibly easy to use in the wrong ways. Let's explore one of those bad practices and how to avoid it.
+
+# Fragments are misunderstood
+
+Fragments are a powerful tool in GraphQL, but they're also one of the most misunderstood aspects of GraphQL. Developers often point to "being able to re-use the fragment in multiple places and not needing to repeat yourself."
+
+We've always been taught to avoid duplicated logic in our codebase, e.g. DRY - don't repeat yourself, but there's little-to-no benefit to reusing fragments in this way - and usually steers us to bad patterns.
+
+<Tweet
+  author="dan_abramov"
+  tweetId="1634959944733835265"
+  content="if you’re not composing GraphQL fragments from multiple components into one query (as Relay does), i think you’re missing 80% of the point of GraphQL."
+/>
+
+The primary benefit of fragments is being able to define a subset of fields on a GraphQL operation, corresponding
+to a component's data requirements and then compose those fragments into a root query or mutation. This
+pattern is the primary way to use GraphQL in the [Relay](relay.dev) client library.
+
+- Independently define and evolve component data dependencies
+  - When using fragments to be "DRY", you likely will affect other components that need that data
+  - Adding a new field to the fragment only affects that single component, avoiding overfetching
+  - Remove an existing field to the fragment only affects that single component, avoiding underfetching
+  - Data dependencies are colocated with components, making them easy to find and reason about
+- Compose fragments to top-level queries
+  - Lee Byron, co-creator of GraphQL: https://www.youtube.com/watch?v=WQLzZf34FJ8&t=1043s
+  - This type of fragment "re-use" is great, i.e. reusing to compose queries in different places that components are rendered.
+  - When a component is rendered in multiple places, this pattern makes it easy to compose those data requirements to mutliple top-level queries
+  - Composition can be happen in multiple levels, i.e. a component can be constructed from multiple fragments, which can be nested
+- Codegen strong type definitions specific to the component
+
+# Example
+
+```ts
+// some-container.ts
+export function SomeContainer() {
+  const data = useQuery(SomeContainer.query)
+  return (
+    <div>
+      <Avatar avatar={data.user.avatar} />
+    </div>
+  )
+}
+
+SomeContainer.query = gql`
+  query SomeContainer {
+    user {
+      id
+      ...Avatar_user
+    }
+  }
+`
+
+// avatar.ts
+export function Avatar({ avatar }: { avatar: FragmentType<typeof Avatar.fragments.avatar> }) {
+  return <img src={user.avatar.url} alt={alt} />
+}
+
+Avatar.fragments = {
+  avatar: gql`
+    fragment Avatar_user on User {
+      avatar {
+        id
+        alt
+        url
+      }
+    }
+  `,
+}
+```
