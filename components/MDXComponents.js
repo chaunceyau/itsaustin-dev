@@ -9,7 +9,14 @@ import TOCInline from './TOCInline'
 import Pre from './Pre'
 
 export const MDXComponents = {
-  Tweet: ({ content, author, tweetId }) => {
+  h1: ({ children }) => <h1 className="mb-4">{children}</h1>,
+  Tweet: ({ content, author, tweetId, authorAvatarFilePath }) => {
+    // <Tweet
+    //   author="dan_abramov"
+    //   tweetId="1634959944733835265"
+    //   authorAvatarFilePath="/static/images/people/dan-abramov.jpg"
+    //   content="if you’re not composing GraphQL fragments from multiple components into one query (as Relay does), i think you’re missing 80% of the point of GraphQL."
+    // />
     return (
       <a
         href={`https://twitter.com/${author}/status/${tweetId}`}
@@ -19,9 +26,11 @@ export const MDXComponents = {
           <div className="pr-4 pl-2">
             <p className="m-0">{content}</p>
             <div className="flex items-center pt-4 pb-2">
-              <img
-                className="h-10 w-10 rounded-full m-0"
-                src="https://pbs.twimg.com/profile_images/1545194945161707520/rqkwPViA_400x400.jpg"
+              <Image
+                width={36}
+                height={36}
+                src={authorAvatarFilePath}
+                className="rounded-full m-0"
                 alt={author + ' profile image'}
               />
               <p className="ml-4 my-0">@{author}</p>
@@ -47,9 +56,6 @@ export const MDXComponents = {
   },
   TwitterTweetEmbed,
   Image: (args) => {
-    console.log('args')
-    console.log(args)
-    console.log('../public' + args.src)
     if (!args.src) return null
     // const image = require('../public' + args.src)
     // const image = require(args.src)
@@ -65,27 +71,69 @@ export const MDXComponents = {
     const inspect = isQuoteChildrenAnArray
       ? args.children?.props?.children[0]
       : args.children?.props?.children
-    const keywords = [':quote:', ':author:', ':jobRole', ':source:', ':sourceUrl:']
+    const keywords = [':quote:', ':author:', ':jobTitle', ':source:']
 
     const authorIndex = inspect.indexOf(':author:')
-    const jobRoleIndex = inspect.indexOf(':jobRole:')
+    const jobTitleIndex = inspect.indexOf(':jobTitle:')
     const sourceIndex = inspect.indexOf(':source:')
-    const sourceUrlIndex = inspect.indexOf(':sourceUrl:')
 
     const quote = inspect.substring(':quote:'.length, authorIndex - 1)
-    const author = inspect.substring(authorIndex + ':author:'.length, jobRoleIndex - 1)
-    const jobRole = inspect.substring(jobRoleIndex + ':jobRole:'.length, sourceIndex - 1)
-    const source = inspect.substring(sourceIndex + ':source:'.length, sourceUrlIndex - 1)
-    const sourceUrl = inspect.substring(sourceUrlIndex + ':sourceUrl:'.length)
+    const author = inspect.substring(authorIndex + ':author:'.length, jobTitleIndex - 1)
+    const jobTitle = inspect.substring(jobTitleIndex + ':jobTitle:'.length, sourceIndex - 1)
+    const source = args.children?.props?.children[1]?.props?.children
 
-    if (!quote) return <span>quote missing</span>
-
+    if (!quote) return <span>Quote missing</span>
+    console.log('jobTitle, index:' + jobTitleIndex)
+    console.log(jobTitle)
+    console.log('source, index: ' + sourceIndex)
+    console.log(source)
+    // console.log(sourceUrl)
     return (
       <div className="flex w-full flex-col border-l-4 border-indigo-500 bg-indigo-200 bg-opacity-90 py-3 px-4">
         <span className="ml-2 text-sm text-indigo-600">{quote}</span>
-        <span className="ml-2 mt-2 text-xs font-light text-indigo-600">
-          ∙ {author}, {jobRole}
-        </span>
+        <div className="flex items-end justify-between">
+          <span className="ml-2 mt-2 text-xs font-light text-indigo-600">
+            ∙ {author}, {jobTitle}
+          </span>
+          <a
+            href={source}
+            className="flex items-center"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ textDecoration: 'none' }}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth="1.25"
+              stroke="currentColor"
+              className="w-3 h-3"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
+              />
+            </svg>
+
+            {/* <span className="text-xs mr-1 font-light">Source</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth="1"
+              stroke="currentColor"
+              className="w-3"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
+              />
+            </svg> */}
+          </a>
+        </div>
       </div>
     )
   },

@@ -1,11 +1,24 @@
 ---
-title: 'Colocating Data Dependencies'
+title: 'Colocating & Composing Data Dependencies'
 date: '2022-03-12'
 tags: ['GraphQL']
 draft: false
 summary: 'Understanding how to actually avoid waterfalls in GraphQL'
 heroImage: 'graphql.png'
 icon: GraphQL
+quotedIndividuals:
+  [
+    {
+      name: 'Lee Byron',
+      title: 'Co-creator of GraphQL',
+      avatarFilePath: '/static/images/people/lee-byron.jpeg',
+    },
+    {
+      name: 'Dan Abramov',
+      title: 'React Core Team',
+      avatarFilePath: '/static/images/people/dan-abramov.jpg',
+    },
+  ]
 ---
 
 GraphQL is incredibly powerful, but also incredibly easy to use in the wrong ways. Let's explore one of those bad practices and how to avoid it.
@@ -14,13 +27,13 @@ GraphQL is incredibly powerful, but also incredibly easy to use in the wrong way
 
 Fragments are a powerful tool in GraphQL, but they're also one of the most misunderstood aspects of GraphQL. Developers often point to "being able to re-use the fragment in multiple places and not needing to repeat yourself."
 
+> :quote: If you’re not composing GraphQL fragments from multiple components into one query (as Relay does), I think you’re missing 80% of the point of GraphQL
+> :author: Dan Abramov
+> :jobTitle: React Core Team
+> :source: https://twitter.com/dan_abramov/status/1634959944733835265?s=20
+
 We've always been taught to avoid duplicated logic in our codebase, e.g. DRY - don't repeat yourself, but there's little-to-no benefit to reusing fragments in this way - and usually steers us to bad patterns.
 
-<Tweet
-  author="dan_abramov"
-  tweetId="1634959944733835265"
-  content="if you’re not composing GraphQL fragments from multiple components into one query (as Relay does), i think you’re missing 80% of the point of GraphQL."
-/>
 
 The primary benefit of fragments is being able to define a subset of fields on a GraphQL operation, corresponding
 to a component's data requirements and then compose those fragments into a root query or mutation. This
@@ -77,3 +90,8 @@ Avatar.fragments = {
   `,
 }
 ```
+
+# Other References
+- https://microsoft.github.io/graphitation/docs/learn-graphql/the-design-of-graphql#composition
+- https://youtu.be/9sc8Pyc51uU?t=784
+- https://relay.dev/docs/tutorial/fragments-1/

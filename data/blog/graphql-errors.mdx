@@ -1,0 +1,40 @@
+---
+title: 'GraphQL, errors as data'
+date: '2022-03-12'
+tags: ['GraphQL']
+draft: false
+summary: 'Understanding how to actually avoid waterfalls in GraphQL'
+heroImage: 'graphql.png'
+icon: GraphQL
+quotedIndividuals: []
+---
+
+# Overview
+
+- Unpredicatable _errors_ vs expected outcomes
+- Strongly-typed schema vs extensions array
+- Partial data and partial errors
+  - a lot easier to manage
+
+```
+type Query {
+  user(id: ID!): QueryUserResponse
+}
+
+type QueryUserResponse = User | BlockedUser | UserNotFound
+
+type User {
+  id: ID!
+  email: String!
+}
+
+type BlockedUser {
+  id: ID!
+  reason: String!
+}
+
+type UserNotFound {
+  id: ID!
+  message: String!
+}
+```
