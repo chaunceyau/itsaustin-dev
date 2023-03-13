@@ -83,11 +83,6 @@ export const MDXComponents = {
     const source = args.children?.props?.children[1]?.props?.children
 
     if (!quote) return <span>Quote missing</span>
-    console.log('jobTitle, index:' + jobTitleIndex)
-    console.log(jobTitle)
-    console.log('source, index: ' + sourceIndex)
-    console.log(source)
-    // console.log(sourceUrl)
     return (
       <div className="flex w-full flex-col border-l-4 border-indigo-500 bg-indigo-200 bg-opacity-90 py-3 px-4">
         <span className="ml-2 text-sm text-indigo-600">{quote}</span>

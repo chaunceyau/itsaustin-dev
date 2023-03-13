@@ -11,7 +11,6 @@ const postDateTemplate = { weekday: 'long', year: 'numeric', month: 'long', day:
 
 export default function PostLayout({ frontMatter, children, authorDetails, next, prev }) {
   const { slug, date, title, tags, quotedIndividuals } = frontMatter
-  console.log(quotedIndividuals)
   return (
     <SectionContainer>
       <BlogSEO
@@ -58,7 +57,7 @@ const PostLayoutHeader = ({ date, title, tags, quotedIndividuals }) => (
         <Tag text={tag} key={tag} />
       ))}
     </div>
-    {quotedIndividuals.length > 0 && (
+    {quotedIndividuals?.length > 0 && (
       <div className="flex">
         <div className="flex items-center justify-center">
           <h1 className="mb-3 text-sm -rotate-90 mt-3 text-gray-600 -ml-12 font-light">Quotes</h1>

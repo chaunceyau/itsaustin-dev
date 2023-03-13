@@ -10,7 +10,7 @@ const TagContainer = ({ text }) => (
 const Tag = ({ text, hyperlink }) => {
   if (hyperlink) {
     return (
-      <Link href={`/tags/${kebabCase(text)}`}>
+      <Link href={`/tags/${kebabCase(text)}`} passHref>
         <TagContainer text={text} />
       </Link>
     )
