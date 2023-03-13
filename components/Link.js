@@ -8,16 +8,16 @@ const CustomLink = ({ href, ...rest }) => {
   if (isInternalLink) {
     return (
       <Link href={href}>
-        <a {...rest} className="break-all" />
+        <a {...rest} />
       </Link>
     )
   }
 
   if (isAnchorLink) {
-    return <a href={href} {...rest} className="break-all" />
+    return <a href={href} {...rest} />
   }
 
-  return <a target="_blank" rel="noopener noreferrer" href={href} {...rest} className="break-all" />
+  return <a target="_blank" rel="noopener noreferrer" href={href} {...rest} />
 }
 
 export default CustomLink

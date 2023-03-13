@@ -63,7 +63,7 @@ export const MDXComponents = {
     return <Image alt={args.alt} src={args.src} width={args.width} height={args.height} />
   },
   TOCInline,
-  a: CustomLink,
+  a: (props) => <CustomLink {...props} className="break-words" />,
   pre: Pre,
   blockquote: (args) => {
     const isQuoteChildrenAnArray = Array.isArray(args.children?.props?.children)
